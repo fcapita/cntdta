@@ -1,0 +1,7 @@
+{
+  "name": "CNTDTA - Conselho Nacional dos Técnicos de Diagnóstico e Terapêutica de Angola",
+  "description": "Portal oficial do CNTDTA para representação, valorização e defesa dos profissionais de Diagnóstico e Terapêutica em Angola.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
