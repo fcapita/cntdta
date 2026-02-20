@@ -3,14 +3,31 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
-}
+console.log('CNTDTA: Inicializando aplicação...');
 
-const root = createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const renderApp = () => {
+  const rootElement = document.getElementById('root');
+  if (!rootElement) {
+    console.error("CNTDTA Erro: Elemento #root não encontrado no DOM.");
+    return;
+  }
+
+  try {
+    const root = createRoot(rootElement);
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+    console.log('CNTDTA: Aplicação renderizada com sucesso.');
+  } catch (error) {
+    console.error("CNTDTA Erro Crítico na Renderização:", error);
+  }
+};
+
+// Garante que o DOM está pronto antes de renderizar
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderApp);
+} else {
+  renderApp();
+}
