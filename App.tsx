@@ -33,23 +33,28 @@ const App: React.FC = () => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '') || 'home';
       
-      // Inicia animação de transição
       setIsTransitioning(true);
       setIsPageLoading(true);
 
-      setTimeout(() => {
+      // Tempo de transição otimizado para melhor UX
+      const transitionTimeout = setTimeout(() => {
         setCurrentPage(hash);
         setIsTransitioning(false);
         window.scrollTo(0, 0);
         
-        // Simula um pequeno delay para o conteúdo "assentar"
-        setTimeout(() => {
+        // Remove skeleton após o conteúdo estar pronto no DOM
+        const loadingTimeout = setTimeout(() => {
           setIsPageLoading(false);
-        }, 500);
-      }, 400);
+        }, 300);
+
+        return () => clearTimeout(loadingTimeout);
+      }, 350);
+
+      return () => clearTimeout(transitionTimeout);
     };
 
     window.addEventListener('hashchange', handleHashChange);
+    // Execução imediata para definir a página inicial baseada na URL
     handleHashChange();
 
     return () => window.removeEventListener('hashchange', handleHashChange);
@@ -83,7 +88,7 @@ const App: React.FC = () => {
         toggleDarkMode={toggleDarkMode} 
       />
       
-      <main className={`flex-grow pt-20 transition-all duration-500 ${isTransitioning ? 'opacity-0 scale-[0.98]' : 'opacity-100 scale-100'}`}>
+      <main className={`flex-grow pt-20 transition-all duration-500 ${isTransitioning ? 'opacity-0 scale-[0.99]' : 'opacity-100 scale-100'}`}>
         {renderPage()}
       </main>
       
