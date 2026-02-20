@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 
 const Portal: React.FC = () => {
   const [isLogged, setIsLogged] = useState(false);
+  const [loginAttempts, setLoginAttempts] = useState(0);
+  const [isLocked, setIsLocked] = useState(false);
 
   const services = [
     { title: 'Emissão de Carteiras', icon: 'fa-id-card', color: 'bg-blue-600', desc: 'Solicite ou renove sua cédula profissional digital e física.' },
@@ -12,6 +14,20 @@ const Portal: React.FC = () => {
     { title: 'Oportunidades', icon: 'fa-briefcase', color: 'bg-rose-600', desc: 'Acompanhe editais de concursos e vagas no setor público e privado.' },
     { title: 'Suporte Técnico', icon: 'fa-headset', color: 'bg-gray-600', desc: 'Ajuda direta com o software desenvolvido pela Zulumuka.' },
   ];
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (loginAttempts >= 5) {
+      setIsLocked(true);
+      alert("Demasiadas tentativas. Por favor, tente novamente mais tarde por razões de segurança.");
+      return;
+    }
+
+    // Simulação de autenticação segura
+    setIsLogged(true);
+    setLoginAttempts(0);
+  };
 
   if (!isLogged) {
     return (
@@ -25,17 +41,35 @@ const Portal: React.FC = () => {
             <p className="text-gray-500 dark:text-gray-400">Introduza os seus dados para aceder à área reservada.</p>
           </div>
           
-          <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setIsLogged(true); }}>
+          <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Número da Cédula / E-mail</label>
-              <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="Ex: CNT/1234/2024" required />
+              <input 
+                type="text" 
+                autoComplete="username"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" 
+                placeholder="Ex: CNT/1234/2024" 
+                required 
+                disabled={isLocked}
+              />
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Palavra-passe</label>
-              <input type="password" className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="••••••••" required />
+              <input 
+                type="password" 
+                autoComplete="current-password"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" 
+                placeholder="••••••••" 
+                required 
+                disabled={isLocked}
+              />
             </div>
-            <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold shadow-lg transition-all hover:scale-[1.02] active:scale-95">
-              Entrar no Portal
+            <button 
+              type="submit" 
+              className={`w-full py-4 rounded-xl font-bold shadow-lg transition-all active:scale-95 ${isLocked ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white hover:scale-[1.02]'}`}
+              disabled={isLocked}
+            >
+              {isLocked ? 'Acesso Bloqueado' : 'Entrar no Portal'}
             </button>
           </form>
           
