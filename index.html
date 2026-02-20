@@ -11,6 +11,12 @@
 
     <title>CNTDTA - Portal Oficial</title>
     
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://esm.sh" crossorigin>
+
     <!-- Tailwind Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -21,8 +27,9 @@
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
             },
-            animation: {
-              shimmer: 'shimmer 1.5s infinite',
+            aspectRatio: {
+              'video': '16 / 9',
+              'portrait': '3 / 4',
             }
           }
         }
@@ -37,10 +44,9 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes loadingBar { 0% { width: 0%; left: 0; } 50% { width: 70%; left: 0; } 100% { width: 100%; left: 0; } }
-        .animate-fadeIn { animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        .animate-slideUp { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .loading-bar { height: 4px; background: linear-gradient(90deg, #3b82f6, #60a5fa); position: fixed; top: 0; left: 0; z-index: 9999; animation: loadingBar 0.5s ease-in-out forwards; }
-        @keyframes shimmer { 100% { transform: translateX(100%); } }
+        .animate-fadeIn { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .animate-slideUp { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .loading-bar { height: 3px; background: linear-gradient(90deg, #2563eb, #60a5fa); position: fixed; top: 0; left: 0; z-index: 9999; animation: loadingBar 0.4s ease-in-out forwards; }
     </style>
 
     <script type="importmap">

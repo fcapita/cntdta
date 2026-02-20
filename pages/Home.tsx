@@ -15,9 +15,14 @@ const Home: React.FC = () => {
       <section className="relative h-[650px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://picsum.photos/id/40/1920/1080" 
-            alt="Medical Professionals" 
-            className="w-full h-full object-cover scale-105 animate-[pulse_10s_infinite]"
+            src="https://picsum.photos/id/40/1280/720.webp" 
+            alt="Profissionais de Saúde CNTDTA" 
+            className="w-full h-full object-cover scale-105"
+            width="1280"
+            height="720"
+            // Fix: Changed fetchpriority to fetchPriority to resolve TypeScript error in React.
+            fetchPriority="high"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-900/40 dark:from-gray-950/95 dark:to-blue-950/40"></div>
         </div>
@@ -49,38 +54,22 @@ const Home: React.FC = () => {
       {/* Quick Access Buttons */}
       <section className="relative -mt-16 z-20 max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-blue-600 animate-slideUp stagger-1 group transition-colors duration-300">
-            <div className="bg-blue-50 dark:bg-blue-900/30 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
-              <i className="fa-solid fa-user-plus text-2xl text-blue-600 group-hover:text-white transition-colors"></i>
+          {[
+            { title: 'Inscrição Online', icon: 'fa-user-plus', color: 'border-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/30', text: 'Regularize sua carteira profissional e integre-se legalmente ao sistema de saúde.', link: '#portal' },
+            { title: 'Verificar Autenticidade', icon: 'fa-qrcode', color: 'border-emerald-500', bg: 'bg-emerald-50 dark:bg-emerald-900/30', text: 'Validação rápida de cédulas profissionais através de código QR para segurança pública.', link: '#portal' },
+            { title: 'Regime Jurídico', icon: 'fa-download', color: 'border-amber-500', bg: 'bg-amber-50 dark:bg-amber-900/30', text: 'Consulte o Decreto Presidencial n.º 188/18 que regula a carreira de Diagnóstico.', link: '#profissoes' }
+          ].map((item, idx) => (
+            <div key={idx} className={`bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 ${item.color} animate-slideUp group transition-all duration-300 hover:-translate-y-2`}>
+              <div className={`${item.bg} w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors`}>
+                <i className={`fa-solid ${item.icon} text-2xl text-blue-600 group-hover:text-white transition-colors`}></i>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
+              <p className="text-gray-500 dark:text-gray-400 mb-6">{item.text}</p>
+              <a href={item.link} className="text-blue-600 dark:text-blue-400 font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                Saber mais <i className="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Inscrição Online</h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">Regularize sua carteira profissional e integre-se legalmente ao sistema de saúde.</p>
-            <a href="#portal" className="text-blue-600 dark:text-blue-400 font-bold flex items-center gap-2 hover:gap-4 transition-all">
-              Começar agora <i className="fa-solid fa-arrow-right"></i>
-            </a>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-emerald-500 animate-slideUp stagger-2 group transition-colors duration-300">
-            <div className="bg-emerald-50 dark:bg-emerald-900/30 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 transition-colors">
-              <i className="fa-solid fa-qrcode text-2xl text-emerald-600 group-hover:text-white transition-colors"></i>
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Verificar Autenticidade</h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">Validação rápida de cédulas profissionais através de código QR para segurança pública.</p>
-            <a href="#portal" className="text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-2 hover:gap-4 transition-all">
-              Validar QR Code <i className="fa-solid fa-arrow-right"></i>
-            </a>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-amber-500 animate-slideUp stagger-3 group transition-colors duration-300">
-            <div className="bg-amber-50 dark:bg-amber-900/30 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
-              <i className="fa-solid fa-download text-2xl text-amber-600 group-hover:text-white transition-colors"></i>
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Regime Jurídico</h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">Consulte o Decreto Presidencial n.º 188/18 que regula a carreira de Diagnóstico.</p>
-            <a href="#profissoes" className="text-amber-600 dark:text-amber-400 font-bold flex items-center gap-2 hover:gap-4 transition-all">
-              Baixar Decreto <i className="fa-solid fa-arrow-right"></i>
-            </a>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -96,7 +85,7 @@ const Home: React.FC = () => {
             {stats.map((stat, idx) => (
               <div 
                 key={idx} 
-                className={`bg-white dark:bg-gray-800 p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-700 text-center hover:shadow-lg hover:border-blue-100 dark:hover:border-blue-900 transition-all animate-slideUp stagger-${idx + 1}`}
+                className="bg-white dark:bg-gray-800 p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-700 text-center hover:shadow-lg hover:border-blue-100 dark:hover:border-blue-900 transition-all animate-slideUp"
               >
                 <p className="text-4xl font-extrabold text-blue-600 dark:text-blue-400 mb-2">{stat.value}</p>
                 <p className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">{stat.label}</p>

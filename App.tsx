@@ -34,27 +34,26 @@ const App: React.FC = () => {
       const hash = window.location.hash.replace('#', '') || 'home';
       
       setIsTransitioning(true);
-      setIsPageLoading(true);
-
-      // Tempo de transição otimizado para melhor UX
+      
+      // Inicia a troca de página
       const transitionTimeout = setTimeout(() => {
         setCurrentPage(hash);
-        setIsTransitioning(false);
+        setIsPageLoading(true);
         window.scrollTo(0, 0);
         
-        // Remove skeleton após o conteúdo estar pronto no DOM
+        // Simula carregamento de dados e resolve a transição visual
         const loadingTimeout = setTimeout(() => {
           setIsPageLoading(false);
-        }, 300);
+          setIsTransitioning(false);
+        }, 150);
 
         return () => clearTimeout(loadingTimeout);
-      }, 350);
+      }, 100);
 
       return () => clearTimeout(transitionTimeout);
     };
 
     window.addEventListener('hashchange', handleHashChange);
-    // Execução imediata para definir a página inicial baseada na URL
     handleHashChange();
 
     return () => window.removeEventListener('hashchange', handleHashChange);
@@ -80,7 +79,7 @@ const App: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
-      <div className={`loading-bar ${isTransitioning ? 'opacity-100' : 'opacity-0'}`} />
+      <div className={`loading-bar transition-opacity duration-300 ${isTransitioning ? 'opacity-100' : 'opacity-0'}`} />
       
       <Navbar 
         currentPage={currentPage} 
@@ -88,7 +87,7 @@ const App: React.FC = () => {
         toggleDarkMode={toggleDarkMode} 
       />
       
-      <main className={`flex-grow pt-20 transition-all duration-500 ${isTransitioning ? 'opacity-0 scale-[0.99]' : 'opacity-100 scale-100'}`}>
+      <main className={`flex-grow pt-20 transition-all duration-300 ${isTransitioning ? 'opacity-50 blur-[2px]' : 'opacity-100 blur-0'}`}>
         {renderPage()}
       </main>
       
