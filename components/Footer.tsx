@@ -13,9 +13,18 @@ const Footer: React.FC = () => {
               Representando e valorizando a classe desde 2007.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-blue-400 transition-colors"><i className="fa-brands fa-facebook text-xl"></i></a>
-              <a href="#" className="hover:text-blue-400 transition-colors"><i className="fa-brands fa-linkedin text-xl"></i></a>
-              <a href="#" className="hover:text-blue-400 transition-colors"><i className="fa-brands fa-instagram text-xl"></i></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-all hover:scale-110" title="Twitter (X)">
+                <i className="fa-brands fa-x-twitter text-xl"></i>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-all hover:scale-110" title="LinkedIn">
+                <i className="fa-brands fa-linkedin text-xl"></i>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-all hover:scale-110" title="Instagram">
+                <i className="fa-brands fa-instagram text-xl"></i>
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-all hover:scale-110" title="Facebook">
+                <i className="fa-brands fa-facebook text-xl"></i>
+              </a>
             </div>
           </div>
           
@@ -43,15 +52,15 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-semibold mb-6">Contactos</h4>
             <ul className="space-y-4 text-sm text-blue-100">
               <li className="flex items-start gap-3">
-                <i className="fa-solid fa-location-dot mt-1"></i>
+                <i className="fa-solid fa-location-dot mt-1 text-blue-400"></i>
                 <span>Sede Nacional: Luanda, Angola</span>
               </li>
               <li className="flex items-center gap-3">
-                <i className="fa-solid fa-phone"></i>
+                <i className="fa-solid fa-phone text-blue-400"></i>
                 <span>+244 9XX XXX XXX</span>
               </li>
               <li className="flex items-center gap-3">
-                <i className="fa-solid fa-envelope"></i>
+                <i className="fa-solid fa-envelope text-blue-400"></i>
                 <span>secretaria@cntdta.ao</span>
               </li>
             </ul>
