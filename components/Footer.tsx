@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
             <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
             <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
           </div>
-          <p>Powered by Zulumuka & AI</p>
+          <p>Dev by Zulumuka</p>
         </div>
       </div>
     </footer>
